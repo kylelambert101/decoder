@@ -1,6 +1,6 @@
 import { Label, Stack } from "@fluentui/react";
 import * as React from "react";
-import { CodeCharacter, codeLetters } from "../cryptoTypes";
+import { codeLetters } from "../cryptoTypes";
 import {
   getCaesarResultWithOffset,
   splitIntoCodeCharacters,
