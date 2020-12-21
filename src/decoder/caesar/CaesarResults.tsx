@@ -15,13 +15,17 @@ const CaesarResults = ({ message }: Props) => {
       <Label htmlFor={resultStackId}>Caesar Cipher Results</Label>
       <Stack horizontal tokens={{ childrenGap: "1em" }}>
         <Stack tokens={{ childrenGap: "0.25em" }}>
-          {codeLetters.map((_letter, index) => (
-            <span>(Offset {index})</span>
+          {codeLetters.map((letter, index) => (
+            <Stack.Item key={`${letter}OffsetLabel`}>
+              <span>(Offset {index})</span>
+            </Stack.Item>
           ))}
         </Stack>
         <Stack tokens={{ childrenGap: "0.25em" }}>
-          {codeLetters.map((_letter, index) => (
-            <span>{getCaesarResultWithOffset(message, index)}</span>
+          {codeLetters.map((letter, index) => (
+            <Stack.Item key={`${letter}OffsetResult`}>
+              <span>{getCaesarResultWithOffset(message, index)}</span>
+            </Stack.Item>
           ))}
         </Stack>
       </Stack>
