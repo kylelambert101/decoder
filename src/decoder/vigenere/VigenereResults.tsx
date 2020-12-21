@@ -30,7 +30,7 @@ const VigenereResults = ({ message }: Props) => {
           style={{ width: 100 }}
         />
       </Stack>
-      <span id={resultId}>{getVigenereResult(message, key)}</span>
+      <span id={resultId}>{getVigenereResult(message, key) || "-"}</span>
     </Stack>
   );
 };
