@@ -24,7 +24,7 @@ const CaesarResults = ({ message }: Props) => {
         <Stack tokens={{ childrenGap: "0.25em" }}>
           {codeLetters.map((letter, index) => (
             <Stack.Item key={`${letter}OffsetResult`}>
-              <span>{getCaesarResultWithOffset(message, index)}</span>
+              <span>{getCaesarResultWithOffset(message, index) || "-"}</span>
             </Stack.Item>
           ))}
         </Stack>

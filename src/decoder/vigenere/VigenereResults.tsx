@@ -12,7 +12,7 @@ const VigenereResults = ({ message }: Props) => {
   return (
     <Stack>
       <Label htmlFor={resultId}>Vigenère Cipher Results</Label>
-      <span id={resultId}>{getVigenereResult(message, "SHIFTER")}</span>
+      <span id={resultId}>{getVigenereResult(message, "SHIFTER") || "-"}</span>
     </Stack>
   );
 };

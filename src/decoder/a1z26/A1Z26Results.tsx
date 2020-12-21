@@ -12,7 +12,7 @@ const A1Z26Results = ({ message }: Props) => {
   return (
     <Stack>
       <Label htmlFor={resultId}>A1Z26 Cipher Results</Label>
-      <span id={resultId}>{getA1Z26Result(message, "-")}</span>
+      <span id={resultId}>{getA1Z26Result(message, "-") || "-"}</span>
     </Stack>
   );
 };

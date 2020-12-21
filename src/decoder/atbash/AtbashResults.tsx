@@ -12,7 +12,7 @@ const AtbashResults = ({ message }: Props) => {
   return (
     <Stack>
       <Label htmlFor={resultId}>Atbash Cipher Results</Label>
-      <span id={resultId}>{getAtbashResult(message)}</span>
+      <span id={resultId}>{getAtbashResult(message) || "-"}</span>
     </Stack>
   );
 };
