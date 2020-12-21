@@ -2,7 +2,7 @@ import * as React from "react";
 import { Stack, TextField } from "@fluentui/react";
 import CaesarResults from "./caesar/CaesarResults";
 import AtbashResults from "./atbash/AtbashResults";
-import A1Z26Results from "./a1z26/A1Z26";
+import A1Z26Results from "./a1z26/A1Z26Results";
 import VigenereResults from "./vigenere/VigenereResults";
 
 interface Props {}
