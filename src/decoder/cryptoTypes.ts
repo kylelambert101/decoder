@@ -1,4 +1,4 @@
-export const codeLetters: string[] = [
+export const codeLetters = [
   "A",
   "B",
   "C",
@@ -25,7 +25,7 @@ export const codeLetters: string[] = [
   "X",
   "Y",
   "Z",
-];
+] as const;
 
 export type CodeLetter = typeof codeLetters[number];
 

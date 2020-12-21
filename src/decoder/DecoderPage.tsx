@@ -3,6 +3,7 @@ import { Stack, TextField } from "@fluentui/react";
 import CaesarResults from "./caesar/CaesarResults";
 import AtbashResults from "./atbash/AtbashResults";
 import A1Z26Results from "./a1z26/A1Z26";
+import VigenereResults from "./vigenere/VigenereResults";
 
 interface Props {}
 
@@ -31,6 +32,9 @@ const DecoderPage = (props: Props) => {
       </Stack.Item>
       <Stack.Item>
         <A1Z26Results message={message} />
+      </Stack.Item>
+      <Stack.Item>
+        <VigenereResults message={message} />
       </Stack.Item>
       <Stack.Item>
         <CaesarResults message={message} />
