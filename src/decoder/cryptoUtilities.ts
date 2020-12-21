@@ -19,17 +19,21 @@ export const splitIntoCodeCharacters = (message: string): CodeCharacter[] => {
  * Calculate the results of a substitution cipher of `message` using
  * `alternativeAlphabet` as the substitution
  * @param message
- * @param alternativeAlphabet
+ * @param inputAlphabet
+ * @param outputAlphabet
  */
 const getSubstitutionResult = (
   message: CodeCharacter[],
-  alternativeAlphabet: CodeLetter[]
+  inputAlphabet: CodeLetter[],
+  outputAlphabet: CodeLetter[]
 ) => {
   return message.map((letter) =>
     typeof letter.codeLetter === "undefined"
       ? letter.rawValue
       : letter.transform(
-          alternativeAlphabet[codeLetters.indexOf(letter.codeLetter)]
+          outputAlphabet[
+            (inputAlphabet || codeLetters).indexOf(letter.codeLetter)
+          ]
         )
   );
 };
@@ -50,7 +54,13 @@ export const getCaesarResultWithOffset = (
     ...codeLetters.slice(0, offset),
   ];
 
-  return getSubstitutionResult(codedMessage, adjustedAlphabet).join("");
+  return getSubstitutionResult(
+    codedMessage,
+    // Typescript doesn't like that I'm using a readonly array here but it's fine.
+    //@ts-ignore
+    codeLetters,
+    adjustedAlphabet
+  ).join("");
 };
 /**
  * Calculate the resulting string if `message` is encoded by an Atbash
@@ -60,7 +70,13 @@ export const getCaesarResultWithOffset = (
 export const getAtbashResult = (message: string): string => {
   const codedMessage = splitIntoCodeCharacters(message);
   const reversedAlphabet = [...codeLetters].reverse();
-  return getSubstitutionResult(codedMessage, reversedAlphabet).join("");
+  return getSubstitutionResult(
+    codedMessage,
+    // Typescript doesn't like that I'm using a readonly array here but it's fine.
+    //@ts-ignore
+    codeLetters,
+    reversedAlphabet
+  ).join("");
 };
 
 /**
@@ -96,6 +112,30 @@ export const getA1Z26Result = (
           ? m.rawValue
           : codeLetters[m.codeNumber]
       )
+    )
+    .join("");
+};
+
+export const getAlphabetStartingAt = (letter: CodeLetter) => {
+  const ind = codeLetters.indexOf(letter);
+  return [...codeLetters.slice(ind), ...codeLetters.slice(0, ind)];
+};
+
+export const getVigenereResult = (message: string, key: string): string => {
+  let currentKeyInd = 0;
+  return splitIntoCodeCharacters(message)
+    .map((char) =>
+      typeof char.codeLetter !== "undefined"
+        ? getSubstitutionResult(
+            [char],
+            getAlphabetStartingAt(
+              key[currentKeyInd++ % key.length] as CodeLetter
+            ),
+            // Typescript doesn't like that I'm using a readonly array here but it's fine.
+            //@ts-ignore
+            codeLetters
+          )
+        : char.rawValue
     )
     .join("");
 };
