@@ -10,11 +10,11 @@ interface Props {
 
 const AtbashResults = ({ message }: Props) => {
   const resultStackId = getId("resultStack");
-  const codedMessage = splitIntoCodeCharacters(message);
+
   return (
     <Stack>
       <Label htmlFor={resultStackId}>Atbash Cipher Results</Label>
-      <span>{getAtbashResult(codedMessage)}</span>
+      <span>{getAtbashResult(message)}</span>
     </Stack>
   );
 };

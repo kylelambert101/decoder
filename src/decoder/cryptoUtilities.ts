@@ -41,22 +41,24 @@ const getSubstitutionResult = (
  * @param offset Number of positions to shift the cipher
  */
 export const getCaesarResultWithOffset = (
-  message: CodeCharacter[],
+  message: string,
   offset: number
 ): string => {
+  const codedMessage = splitIntoCodeCharacters(message);
   const adjustedAlphabet = [
     ...codeLetters.slice(offset),
     ...codeLetters.slice(0, offset),
   ];
 
-  return getSubstitutionResult(message, adjustedAlphabet).join("");
+  return getSubstitutionResult(codedMessage, adjustedAlphabet).join("");
 };
 /**
  * Calculate the resulting string if `message` is encoded by an Atbash
  * cipher
  * @param message Message to decode
  */
-export const getAtbashResult = (message: CodeCharacter[]): string => {
+export const getAtbashResult = (message: string): string => {
+  const codedMessage = splitIntoCodeCharacters(message);
   const reversedAlphabet = [...codeLetters].reverse();
-  return getSubstitutionResult(message, reversedAlphabet).join("");
+  return getSubstitutionResult(codedMessage, reversedAlphabet).join("");
 };

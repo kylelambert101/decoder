@@ -13,7 +13,7 @@ interface Props {
 
 const CaesarResults = ({ message }: Props) => {
   const resultStackId = getId("resultStack");
-  const codedMessage = splitIntoCodeCharacters(message);
+
   return (
     <Stack>
       <Label htmlFor={resultStackId}>Caesar Cipher Results</Label>
@@ -25,7 +25,7 @@ const CaesarResults = ({ message }: Props) => {
         </Stack>
         <Stack tokens={{ childrenGap: "0.25em" }}>
           {codeLetters.map((_letter, index) => (
-            <span>{getCaesarResultWithOffset(codedMessage, index)}</span>
+            <span>{getCaesarResultWithOffset(message, index)}</span>
           ))}
         </Stack>
       </Stack>
