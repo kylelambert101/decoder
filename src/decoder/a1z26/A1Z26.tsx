@@ -7,12 +7,12 @@ interface Props {
 }
 
 const A1Z26Results = ({ message }: Props) => {
-  const resultStackId = getId("resultStack");
+  const resultId = getId("result");
 
   return (
     <Stack>
-      <Label htmlFor={resultStackId}>A1Z26 Cipher Results</Label>
-      <span>{getA1Z26Result(message, "-")}</span>
+      <Label htmlFor={resultId}>A1Z26 Cipher Results</Label>
+      <span id={resultId}>{getA1Z26Result(message, "-")}</span>
     </Stack>
   );
 };
