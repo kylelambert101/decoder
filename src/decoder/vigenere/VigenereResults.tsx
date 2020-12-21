@@ -7,12 +7,12 @@ interface Props {
 }
 
 const VigenereResults = ({ message }: Props) => {
-  const resultStackId = getId("resultStack");
+  const resultId = getId("result");
 
   return (
     <Stack>
-      <Label htmlFor={resultStackId}>Vigenère Cipher Results</Label>
-      <span>{getVigenereResult(message, "SHIFTER")}</span>
+      <Label htmlFor={resultId}>Vigenère Cipher Results</Label>
+      <span id={resultId}>{getVigenereResult(message, "SHIFTER")}</span>
     </Stack>
   );
 };
