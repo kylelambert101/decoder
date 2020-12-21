@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Stack, TextField } from "@fluentui/react";
 import CaesarResults from "./caesar/CaesarResults";
+import AtbashResults from "./atbash/AtbashResults";
 
 interface Props {}
 
@@ -23,6 +24,9 @@ const DecoderPage = (props: Props) => {
             style={{ width: 400 }}
           />
         </Stack>
+      </Stack.Item>
+      <Stack.Item>
+        <AtbashResults message={message} />
       </Stack.Item>
       <Stack.Item>
         <CaesarResults message={message} />

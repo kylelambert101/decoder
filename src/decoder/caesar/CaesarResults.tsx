@@ -1,11 +1,7 @@
-import { Label, Stack } from "@fluentui/react";
 import * as React from "react";
+import { Label, Stack, getId } from "@fluentui/react";
 import { codeLetters } from "../cryptoTypes";
-import {
-  getCaesarResultWithOffset,
-  splitIntoCodeCharacters,
-} from "../cryptoUtilities";
-import { getId } from "@fluentui/react";
+import { getCaesarResultWithOffset } from "../cryptoUtilities";
 
 interface Props {
   message: string;
@@ -13,7 +9,7 @@ interface Props {
 
 const CaesarResults = ({ message }: Props) => {
   const resultStackId = getId("resultStack");
-  const codedMessage = splitIntoCodeCharacters(message);
+
   return (
     <Stack>
       <Label htmlFor={resultStackId}>Caesar Cipher Results</Label>
@@ -25,7 +21,7 @@ const CaesarResults = ({ message }: Props) => {
         </Stack>
         <Stack tokens={{ childrenGap: "0.25em" }}>
           {codeLetters.map((_letter, index) => (
-            <span>{getCaesarResultWithOffset(codedMessage, index)}</span>
+            <span>{getCaesarResultWithOffset(message, index)}</span>
           ))}
         </Stack>
       </Stack>
