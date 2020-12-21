@@ -62,3 +62,40 @@ export const getAtbashResult = (message: string): string => {
   const reversedAlphabet = [...codeLetters].reverse();
   return getSubstitutionResult(codedMessage, reversedAlphabet).join("");
 };
+
+/**
+ * Calculate the resulting string if `message` is encoded by an A1Z26
+ * cipher
+ * @param message Message to decode
+ */
+export const getA1Z26Result = (
+  message: string,
+  letterDelimiter: string
+): string => {
+  // A1Z26 coded messages are set up differently from normal so parsing has to be custom
+  const pattern = /(\d+|[^\d])/g;
+  // Use a new `codeNumber` field because numbers aren't of type CodeLetter
+  const matches: (CodeCharacter & { codeNumber: number | undefined })[] = [
+    ...message.matchAll(pattern),
+  ].map((item, ind) => ({
+    rawValue: item[0],
+    codeNumber:
+      item[0] === " " || isNaN(Number(item[0].toString()))
+        ? undefined
+        : // Cipher code is 1-indexed so subtract one
+          Number(item[0]) - 1,
+    codeLetter: undefined,
+    position: ind,
+    transform: (c: string) => (c === letterDelimiter ? "" : c.toUpperCase()),
+  }));
+
+  return matches
+    .map((m) =>
+      m.transform(
+        typeof m.codeNumber === "undefined"
+          ? m.rawValue
+          : codeLetters[m.codeNumber]
+      )
+    )
+    .join("");
+};
