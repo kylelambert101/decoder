@@ -80,6 +80,17 @@ export const getAtbashResult = (message: string): string => {
 };
 
 /**
+ * Determine whether a string is numeric and between 1 and 26 (inclusive).
+ * @param s
+ */
+const isValidA1Z26Number = (s: string): boolean => {
+  // Rule out non-numbers
+  if (s === " " || isNaN(Number(s))) return false;
+  const number = Number(s);
+  return 1 <= number && number <= 26;
+};
+
+/**
  * Calculate the resulting string if `message` is encoded by an A1Z26
  * cipher
  * @param message Message to decode
@@ -95,11 +106,10 @@ export const getA1Z26Result = (
     ...message.matchAll(pattern),
   ].map((item, ind) => ({
     rawValue: item[0],
-    codeNumber:
-      item[0] === " " || isNaN(Number(item[0].toString()))
-        ? undefined
-        : // Cipher code is 1-indexed so subtract one
-          Number(item[0]) - 1,
+    codeNumber: isValidA1Z26Number(item[0])
+      ? // Cipher code is 1-indexed so subtract one
+        Number(item[0]) - 1
+      : undefined,
     codeLetter: undefined,
     position: ind,
     transform: (c: string) => (c === letterDelimiter ? "" : c.toUpperCase()),
