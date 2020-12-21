@@ -1,11 +1,7 @@
-import { Label, Stack } from "@fluentui/react";
 import * as React from "react";
+import { Label, Stack, getId } from "@fluentui/react";
 import { codeLetters } from "../cryptoTypes";
-import {
-  getCaesarResultWithOffset,
-  splitIntoCodeCharacters,
-} from "../cryptoUtilities";
-import { getId } from "@fluentui/react";
+import { getCaesarResultWithOffset } from "../cryptoUtilities";
 
 interface Props {
   message: string;
