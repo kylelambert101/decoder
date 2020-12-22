@@ -158,7 +158,7 @@ export const getVigenereResult = (message: string, key: string): string => {
  * @param word
  */
 export const isWord = (word: string): boolean => {
-  const wordPattern = /[a-z]+/g;
+  const wordPattern = /[a-z']+/g;
   return [...word.toLowerCase().matchAll(wordPattern)].reduce(
     (prev, item) => prev && Reflect.get(words, item[0]),
     true
