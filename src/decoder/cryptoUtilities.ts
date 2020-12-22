@@ -1,4 +1,5 @@
 import { CodeCharacter, CodeLetter, codeLetters } from "./cryptoTypes";
+import { words } from "./words";
 /**
  * Split a message string into an array of CodeCharacters
  * @param message
@@ -148,4 +149,9 @@ export const getVigenereResult = (message: string, key: string): string => {
         : char.rawValue
     )
     .join("");
+};
+
+export const isWord = (word: string): boolean => {
+  //TODO strip symbols before lookup
+  return Reflect.get(words, word.toLowerCase());
 };
