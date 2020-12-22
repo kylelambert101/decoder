@@ -1,4 +1,5 @@
 import { CodeCharacter, CodeLetter, codeLetters } from "./cryptoTypes";
+import { words } from "./words";
 /**
  * Split a message string into an array of CodeCharacters
  * @param message
@@ -148,4 +149,18 @@ export const getVigenereResult = (message: string, key: string): string => {
         : char.rawValue
     )
     .join("");
+};
+
+/**
+ * Determine whether or not a string is a valid english word.
+ * Returns true if all sequential letter sequences in the string are valid
+ * words. Non-letter characters are treated as separators.
+ * @param word
+ */
+export const isWord = (word: string): boolean => {
+  const wordPattern = /[a-z']+/g;
+  return [...word.toLowerCase().matchAll(wordPattern)].reduce(
+    (prev, item) => prev && Reflect.get(words, item[0]),
+    true
+  );
 };
