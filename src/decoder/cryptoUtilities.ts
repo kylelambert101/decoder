@@ -151,7 +151,16 @@ export const getVigenereResult = (message: string, key: string): string => {
     .join("");
 };
 
+/**
+ * Determine whether or not a string is a valid english word.
+ * Returns true if all sequential letter sequences in the string are valid
+ * words. Non-letter characters are treated as separators.
+ * @param word
+ */
 export const isWord = (word: string): boolean => {
-  //TODO strip symbols before lookup
-  return Reflect.get(words, word.toLowerCase());
+  const wordPattern = /[a-z]+/g;
+  return [...word.toLowerCase().matchAll(wordPattern)].reduce(
+    (prev, item) => prev && Reflect.get(words, item[0]),
+    true
+  );
 };
