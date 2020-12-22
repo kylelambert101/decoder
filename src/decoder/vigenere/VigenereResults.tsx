@@ -1,6 +1,7 @@
 import * as React from "react";
 import { getVigenereResult } from "../cryptoUtilities";
 import { Label, Stack, getId, TextField } from "@fluentui/react";
+import ResultMessage from "../results/ResultMessage";
 
 interface Props {
   message: string;
@@ -30,7 +31,9 @@ const VigenereResults = ({ message }: Props) => {
           style={{ width: 100 }}
         />
       </Stack>
-      <span id={resultId}>{getVigenereResult(message, key) || "-"}</span>
+      <div id={resultId}>
+        <ResultMessage message={getVigenereResult(message, key)} />
+      </div>
     </Stack>
   );
 };

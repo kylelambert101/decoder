@@ -1,6 +1,7 @@
 import * as React from "react";
 import { getA1Z26Result } from "../cryptoUtilities";
 import { Label, Stack, getId } from "@fluentui/react";
+import ResultMessage from "../results/ResultMessage";
 
 interface Props {
   message: string;
@@ -12,7 +13,9 @@ const A1Z26Results = ({ message }: Props) => {
   return (
     <Stack>
       <Label htmlFor={resultId}>A1Z26 Cipher Results</Label>
-      <span id={resultId}>{getA1Z26Result(message, "-") || "-"}</span>
+      <div id={resultId}>
+        <ResultMessage message={getA1Z26Result(message, "-")} />
+      </div>
     </Stack>
   );
 };
