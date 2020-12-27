@@ -1,22 +1,17 @@
 import * as React from "react";
 import { getAtbashResult } from "../cryptoUtilities";
-import { Label, Stack, getId } from "@fluentui/react";
 import ResultMessage from "../results/ResultMessage";
+import ResultCard from "../results/ResultCard";
 
 interface Props {
   message: string;
 }
 
-const AtbashResults = ({ message }: Props) => {
-  const resultId = getId("result");
-
+const AtbashResults = ({ message }: Props): React.ReactElement => {
   return (
-    <Stack>
-      <Label htmlFor={resultId}>Atbash Cipher Results</Label>
-      <div id={resultId}>
-        <ResultMessage message={getAtbashResult(message)} />
-      </div>
-    </Stack>
+    <ResultCard label="Atbash Cipher Results">
+      <ResultMessage message={getAtbashResult(message)} />
+    </ResultCard>
   );
 };
 
