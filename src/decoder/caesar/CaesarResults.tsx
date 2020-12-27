@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Stack } from "@fluentui/react";
+import { Text } from "office-ui-fabric-react/lib/Text";
 import { codeLetters } from "../cryptoTypes";
 import { getCaesarResultWithOffset } from "../cryptoUtilities";
 import ResultMessage from "../results/ResultMessage";
@@ -16,7 +17,7 @@ const CaesarResults = ({ message }: Props): React.ReactElement => {
         <Stack tokens={{ childrenGap: "0.25em" }}>
           {codeLetters.map((letter, index) => (
             <Stack.Item key={`${letter}OffsetLabel`}>
-              <span>(Offset {index})</span>
+              <Text variant="mediumPlus">(Offset {index})</Text>
             </Stack.Item>
           ))}
         </Stack>

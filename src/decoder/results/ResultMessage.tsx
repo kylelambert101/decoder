@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Text } from "office-ui-fabric-react/lib/Text";
 import { isWord } from "../cryptoUtilities";
 
 export interface Props {
@@ -11,21 +12,22 @@ const ResultMessage = ({ message }: Props): React.ReactElement => {
       {message.length > 0 ? (
         message.split(" ").map((word) =>
           isWord(word) ? (
-            <p
+            <Text
+              color="#F7630C"
+              variant="mediumPlus"
               style={{
                 color: "#F7630C",
                 fontWeight: "bold",
-                display: "inline",
               }}
             >
               {word}{" "}
-            </p>
+            </Text>
           ) : (
-            <p style={{ display: "inline" }}>{word} </p>
+            <Text variant="mediumPlus">{word} </Text>
           )
         )
       ) : (
-        <span>-</span>
+        <Text variant="mediumPlus">-</Text>
       )}
     </>
   );
