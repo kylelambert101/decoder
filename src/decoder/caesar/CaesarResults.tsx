@@ -17,7 +17,7 @@ const CaesarResults = ({ message }: Props): React.ReactElement => {
         <Stack tokens={{ childrenGap: "0.25em" }}>
           {codeLetters.map((letter, index) => (
             <Stack.Item key={`${letter}OffsetLabel`}>
-              <Text variant="mediumPlus">(Offset {index})</Text>
+              <Text variant="mediumPlus">(Offset {index + 1})</Text>
             </Stack.Item>
           ))}
         </Stack>
@@ -25,7 +25,7 @@ const CaesarResults = ({ message }: Props): React.ReactElement => {
           {codeLetters.map((letter, index) => (
             <Stack.Item key={`${letter}OffsetResult`}>
               <ResultMessage
-                message={getCaesarResultWithOffset(message, index)}
+                message={getCaesarResultWithOffset(message, index + 1)}
               />
             </Stack.Item>
           ))}
