@@ -5,9 +5,7 @@ import AtbashResults from "./atbash/AtbashResults";
 import A1Z26Results from "./a1z26/A1Z26Results";
 import VigenereResults from "./vigenere/VigenereResults";
 
-interface Props {}
-
-const DecoderPage = (props: Props) => {
+const DecoderPage = () => {
   const [message, setMessage] = React.useState("");
 
   const handleMessageChange = (
@@ -16,7 +14,7 @@ const DecoderPage = (props: Props) => {
   ) => setMessage(newMessage || "");
 
   const stackItemStyles: IStackItemStyles = {
-    root: { width: "70%" },
+    root: { width: "75%" },
   };
 
   return (
@@ -26,12 +24,18 @@ const DecoderPage = (props: Props) => {
       style={{ width: "100%" }}
     >
       <Stack.Item styles={stackItemStyles}>
-        <Stack horizontal horizontalAlign="start">
+        <Stack
+          horizontal
+          horizontalAlign="center"
+          style={{ width: "100%", marginTop: "1em" }}
+          tokens={{ childrenGap: "1em" }}
+        >
           <TextField
-            label="Message"
+            // label="Message"
             value={message}
             onChange={handleMessageChange}
             style={{ width: 400 }}
+            placeholder="Enter message to decode"
           />
         </Stack>
       </Stack.Item>
