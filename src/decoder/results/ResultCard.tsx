@@ -27,7 +27,7 @@ const ResultCard = ({ label, children, labelFriends }: Props) => {
       >
         <Stack
           horizontal
-          horizontalAlign="start"
+          horizontalAlign="space-between"
           tokens={{ childrenGap: "1em" }}
         >
           <Label htmlFor={resultId}>{label}</Label>
