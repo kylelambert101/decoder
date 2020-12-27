@@ -1,7 +1,5 @@
 import * as React from "react";
-import { getA1Z26Result } from "../cryptoUtilities";
 import { Label, Stack, getId } from "@fluentui/react";
-import ResultMessage from "../results/ResultMessage";
 import { Card } from "@uifabric/react-cards";
 
 interface Props {
