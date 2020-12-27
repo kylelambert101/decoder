@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Stack, TextField } from "@fluentui/react";
+import { IStackItemStyles, Stack, TextField } from "@fluentui/react";
 import CaesarResults from "./caesar/CaesarResults";
 import AtbashResults from "./atbash/AtbashResults";
 import A1Z26Results from "./a1z26/A1Z26Results";
@@ -15,9 +15,17 @@ const DecoderPage = (props: Props) => {
     newMessage?: string | undefined
   ) => setMessage(newMessage || "");
 
+  const stackItemStyles: IStackItemStyles = {
+    root: { width: "70%" },
+  };
+
   return (
-    <Stack tokens={{ childrenGap: "1em" }} horizontalAlign="center">
-      <Stack.Item styles={{ root: { width: "80%" } }}>
+    <Stack
+      horizontalAlign="center"
+      tokens={{ childrenGap: "1em" }}
+      style={{ width: "100%" }}
+    >
+      <Stack.Item styles={stackItemStyles}>
         <Stack horizontal horizontalAlign="start">
           <TextField
             label="Message"
@@ -27,16 +35,16 @@ const DecoderPage = (props: Props) => {
           />
         </Stack>
       </Stack.Item>
-      <Stack.Item styles={{ root: { width: "80%" } }}>
+      <Stack.Item styles={stackItemStyles}>
         <AtbashResults message={message} />
       </Stack.Item>
-      <Stack.Item styles={{ root: { width: "80%" } }}>
+      <Stack.Item styles={stackItemStyles}>
         <A1Z26Results message={message} />
       </Stack.Item>
-      <Stack.Item styles={{ root: { width: "80%" } }}>
+      <Stack.Item styles={stackItemStyles}>
         <VigenereResults message={message} />
       </Stack.Item>
-      <Stack.Item styles={{ root: { width: "80%" } }}>
+      <Stack.Item styles={stackItemStyles}>
         <CaesarResults message={message} />
       </Stack.Item>
     </Stack>

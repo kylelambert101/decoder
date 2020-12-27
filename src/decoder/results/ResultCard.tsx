@@ -15,13 +15,13 @@ const ResultCard = ({ label, children, labelFriends }: Props) => {
     <Card
       aria-label={`${label} Results Card`}
       horizontal
-      tokens={{ childrenMargin: 12, maxWidth: "80vw" }}
+      tokens={{ childrenMargin: 12, maxWidth: "100%" }}
       style={{ backgroundColor: "white" }}
     >
       <Card.Item
         styles={{
           root: {
-            maxWidth: "95%",
+            width: "95%",
           },
         }}
       >
@@ -33,7 +33,9 @@ const ResultCard = ({ label, children, labelFriends }: Props) => {
           <Label htmlFor={resultId}>{label}</Label>
           {typeof labelFriends !== "undefined" && labelFriends()}
         </Stack>
-        <div id={resultId}>{children}</div>
+        <Stack horizontalAlign="center" style={{ width: "100%" }}>
+          <div id={resultId}>{children}</div>
+        </Stack>
       </Card.Item>
     </Card>
   );
