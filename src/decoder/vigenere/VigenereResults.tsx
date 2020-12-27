@@ -2,6 +2,8 @@ import * as React from "react";
 import { getVigenereResult } from "../cryptoUtilities";
 import { Label, Stack, getId, TextField } from "@fluentui/react";
 import ResultMessage from "../results/ResultMessage";
+import { Card } from "@uifabric/react-cards";
+import ResultCard from "../results/ResultCard";
 
 interface Props {
   message: string;
@@ -17,12 +19,10 @@ const VigenereResults = ({ message }: Props) => {
     if (typeof newKey !== "undefined") setKey(newKey.toUpperCase());
   };
 
-  const resultId = getId("result");
-
   return (
-    <Stack>
-      <Stack horizontal horizontalAlign="start" tokens={{ childrenGap: "1em" }}>
-        <Label htmlFor={resultId}>Vigenère Cipher Results</Label>
+    <ResultCard
+      label="Vigenère Cipher Results"
+      labelFriends={(): React.ReactElement => (
         <TextField
           label="Key"
           value={key}
@@ -30,11 +30,10 @@ const VigenereResults = ({ message }: Props) => {
           underlined
           style={{ width: 100 }}
         />
-      </Stack>
-      <div id={resultId}>
-        <ResultMessage message={getVigenereResult(message, key)} />
-      </div>
-    </Stack>
+      )}
+    >
+      <ResultMessage message={getVigenereResult(message, key)} />
+    </ResultCard>
   );
 };
 

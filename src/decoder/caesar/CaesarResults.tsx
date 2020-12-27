@@ -1,19 +1,17 @@
 import * as React from "react";
-import { Label, Stack, getId } from "@fluentui/react";
+import { Stack } from "@fluentui/react";
 import { codeLetters } from "../cryptoTypes";
 import { getCaesarResultWithOffset } from "../cryptoUtilities";
 import ResultMessage from "../results/ResultMessage";
+import ResultCard from "../results/ResultCard";
 
 interface Props {
   message: string;
 }
 
 const CaesarResults = ({ message }: Props): React.ReactElement => {
-  const resultStackId = getId("resultStack");
-
   return (
-    <Stack>
-      <Label htmlFor={resultStackId}>Caesar Cipher Results</Label>
+    <ResultCard label="Caesar Cipher Results">
       <Stack horizontal tokens={{ childrenGap: "1em" }}>
         <Stack tokens={{ childrenGap: "0.25em" }}>
           {codeLetters.map((letter, index) => (
@@ -32,7 +30,7 @@ const CaesarResults = ({ message }: Props): React.ReactElement => {
           ))}
         </Stack>
       </Stack>
-    </Stack>
+    </ResultCard>
   );
 };
 

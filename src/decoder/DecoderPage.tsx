@@ -16,8 +16,8 @@ const DecoderPage = (props: Props) => {
   ) => setMessage(newMessage || "");
 
   return (
-    <Stack style={{ paddingLeft: "1em" }}>
-      <Stack.Item>
+    <Stack tokens={{ childrenGap: "1em" }} horizontalAlign="center">
+      <Stack.Item styles={{ root: { width: "80%" } }}>
         <Stack horizontal horizontalAlign="start">
           <TextField
             label="Message"
@@ -27,16 +27,16 @@ const DecoderPage = (props: Props) => {
           />
         </Stack>
       </Stack.Item>
-      <Stack.Item>
+      <Stack.Item styles={{ root: { width: "80%" } }}>
         <AtbashResults message={message} />
       </Stack.Item>
-      <Stack.Item>
+      <Stack.Item styles={{ root: { width: "80%" } }}>
         <A1Z26Results message={message} />
       </Stack.Item>
-      <Stack.Item>
+      <Stack.Item styles={{ root: { width: "80%" } }}>
         <VigenereResults message={message} />
       </Stack.Item>
-      <Stack.Item>
+      <Stack.Item styles={{ root: { width: "80%" } }}>
         <CaesarResults message={message} />
       </Stack.Item>
     </Stack>
