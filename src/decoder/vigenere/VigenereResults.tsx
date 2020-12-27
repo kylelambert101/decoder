@@ -1,8 +1,7 @@
 import * as React from "react";
 import { getVigenereResult } from "../cryptoUtilities";
-import { Label, Stack, getId, TextField } from "@fluentui/react";
+import { TextField } from "@fluentui/react";
 import ResultMessage from "../results/ResultMessage";
-import { Card } from "@uifabric/react-cards";
 import ResultCard from "../results/ResultCard";
 
 interface Props {
