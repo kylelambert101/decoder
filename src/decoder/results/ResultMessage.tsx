@@ -13,10 +13,9 @@ const ResultMessage = ({ message }: Props): React.ReactElement => {
         message.split(" ").map((word) =>
           isWord(word) ? (
             <Text
-              color="#F7630C"
               variant="mediumPlus"
               style={{
-                color: "#F7630C",
+                color: "#6B69D6",
                 fontWeight: "bold",
               }}
             >
