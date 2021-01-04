@@ -3,7 +3,6 @@ import { Stack } from "@fluentui/react";
 import { Text } from "office-ui-fabric-react/lib/Text";
 import { codeLetters } from "../cryptoTypes";
 import { getCaesarResultWithOffset } from "../cryptoUtilities";
-import ResultMessage from "../results/ResultMessage";
 import ResultCard from "../results/ResultCard";
 
 interface Props {

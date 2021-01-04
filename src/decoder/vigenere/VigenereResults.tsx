@@ -1,7 +1,6 @@
 import * as React from "react";
 import { getVigenereResult } from "../cryptoUtilities";
 import { TextField } from "@fluentui/react";
-import ResultMessage from "../results/ResultMessage";
 import ResultCard from "../results/ResultCard";
 
 interface Props {
