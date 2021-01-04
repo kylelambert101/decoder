@@ -6,9 +6,10 @@ import ResultCard from "../results/ResultCard";
 
 interface Props {
   message: string;
+  renderResult: (result: string) => React.ReactNode;
 }
 
-const VigenereResults = ({ message }: Props) => {
+const VigenereResults = ({ message, renderResult }: Props) => {
   const [key, setKey] = React.useState("SECRET_KEY");
 
   const handleKeyChange = (
@@ -31,7 +32,7 @@ const VigenereResults = ({ message }: Props) => {
         />
       )}
     >
-      <ResultMessage message={getVigenereResult(message, key)} />
+      {renderResult(getVigenereResult(message, key))}
     </ResultCard>
   );
 };

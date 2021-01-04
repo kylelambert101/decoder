@@ -8,9 +8,13 @@ import ResultCard from "../results/ResultCard";
 
 interface Props {
   message: string;
+  renderResult: (result: string) => React.ReactNode;
 }
 
-const CaesarResults = ({ message }: Props): React.ReactElement => {
+const CaesarResults = ({
+  message,
+  renderResult,
+}: Props): React.ReactElement => {
   return (
     <ResultCard label="Caesar Cipher Results">
       <Stack horizontal tokens={{ childrenGap: "1em" }}>
@@ -24,9 +28,7 @@ const CaesarResults = ({ message }: Props): React.ReactElement => {
         <Stack tokens={{ childrenGap: "0.25em" }}>
           {codeLetters.map((letter, index) => (
             <Stack.Item key={`${letter}OffsetResult`}>
-              <ResultMessage
-                message={getCaesarResultWithOffset(message, index + 1)}
-              />
+              {renderResult(getCaesarResultWithOffset(message, index + 1))}
             </Stack.Item>
           ))}
         </Stack>

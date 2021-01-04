@@ -1,16 +1,19 @@
 import * as React from "react";
 import { getAtbashResult } from "../cryptoUtilities";
-import ResultMessage from "../results/ResultMessage";
 import ResultCard from "../results/ResultCard";
 
 interface Props {
   message: string;
+  renderResult: (result: string) => React.ReactNode;
 }
 
-const AtbashResults = ({ message }: Props): React.ReactElement => {
+const AtbashResults = ({
+  message,
+  renderResult,
+}: Props): React.ReactElement => {
   return (
     <ResultCard label="Atbash Cipher Results">
-      <ResultMessage message={getAtbashResult(message)} />
+      {renderResult(getAtbashResult(message))}
     </ResultCard>
   );
 };
