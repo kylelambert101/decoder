@@ -7,7 +7,7 @@ interface Props {
   message: string;
 }
 
-const A1Z26Results = ({ message }: Props): React.ReactElement => {
+const A1Z26Card = ({ message }: Props): React.ReactElement => {
   return (
     <ResultCard label="A1Z26 Cipher Results">
       <ResultMessage message={getA1Z26Result(message, "-")} />
@@ -15,4 +15,4 @@ const A1Z26Results = ({ message }: Props): React.ReactElement => {
   );
 };
 
-export default A1Z26Results;
+export default A1Z26Card;

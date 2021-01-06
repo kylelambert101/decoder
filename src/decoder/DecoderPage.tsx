@@ -1,9 +1,9 @@
 import * as React from "react";
 import { IStackItemStyles, Stack, TextField } from "@fluentui/react";
-import CaesarResults from "./caesar/CaesarResults";
-import AtbashResults from "./atbash/AtbashResults";
-import A1Z26Results from "./a1z26/A1Z26Results";
-import VigenereResults from "./vigenere/VigenereResults";
+import CaesarCard from "./cipherCards/CaesarCard";
+import AtbashCard from "./cipherCards/AtbashCard";
+import A1Z26Card from "./cipherCards/A1Z26Card";
+import VigenereCard from "./cipherCards/VigenereCard";
 
 const DecoderPage = () => {
   const [message, setMessage] = React.useState("");
@@ -40,16 +40,16 @@ const DecoderPage = () => {
         </Stack>
       </Stack.Item>
       <Stack.Item styles={stackItemStyles}>
-        <AtbashResults message={message} />
+        <AtbashCard message={message} />
       </Stack.Item>
       <Stack.Item styles={stackItemStyles}>
-        <A1Z26Results message={message} />
+        <A1Z26Card message={message} />
       </Stack.Item>
       <Stack.Item styles={stackItemStyles}>
-        <VigenereResults message={message} />
+        <VigenereCard message={message} />
       </Stack.Item>
       <Stack.Item styles={stackItemStyles}>
-        <CaesarResults message={message} />
+        <CaesarCard message={message} />
       </Stack.Item>
     </Stack>
   );
