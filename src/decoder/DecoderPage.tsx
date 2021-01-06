@@ -34,7 +34,7 @@ const DecoderPage = () => {
             // label="Message"
             value={message}
             onChange={handleMessageChange}
-            style={{ width: 400 }}
+            styles={{ root: { width: "100%" } }}
             placeholder="Enter message to decode"
           />
         </Stack>
