@@ -1,5 +1,8 @@
 import { CodeCharacter, CodeLetter, codeLetters } from "./cryptoTypes";
 import { words } from "./words";
+
+export type cryptoMode = "encode" | "decode";
+
 /**
  * Split a message string into an array of CodeCharacters
  * @param message
@@ -47,7 +50,8 @@ const getSubstitutionResult = (
  */
 export const getCaesarResultWithOffset = (
   message: string,
-  offset: number
+  offset: number,
+  mode: cryptoMode
 ): string => {
   const codedMessage = splitIntoCodeCharacters(message);
   const adjustedAlphabet = [
@@ -59,8 +63,8 @@ export const getCaesarResultWithOffset = (
     codedMessage,
     // Typescript doesn't like that I'm using a readonly array here but it's fine.
     //@ts-ignore
-    codeLetters,
-    adjustedAlphabet
+    mode === "decode" ? codeLetters : adjustedAlphabet,
+    mode === "decode" ? adjustedAlphabet : codeLetters
   ).join("");
 };
 /**
@@ -68,15 +72,15 @@ export const getCaesarResultWithOffset = (
  * cipher
  * @param message Message to decode
  */
-export const getAtbashResult = (message: string): string => {
+export const getAtbashResult = (message: string, mode: cryptoMode): string => {
   const codedMessage = splitIntoCodeCharacters(message);
   const reversedAlphabet = [...codeLetters].reverse();
   return getSubstitutionResult(
     codedMessage,
     // Typescript doesn't like that I'm using a readonly array here but it's fine.
     //@ts-ignore
-    codeLetters,
-    reversedAlphabet
+    mode === "decode" ? codeLetters : reversedAlphabet,
+    mode === "decode" ? reversedAlphabet : codeLetters
   ).join("");
 };
 
@@ -98,33 +102,49 @@ const isValidA1Z26Number = (s: string): boolean => {
  */
 export const getA1Z26Result = (
   message: string,
-  letterDelimiter: string
+  letterDelimiter: string,
+  mode: cryptoMode
 ): string => {
-  // A1Z26 coded messages are set up differently from normal so parsing has to be custom
-  const pattern = /(\d+|[^\d])/g;
-  // Use a new `codeNumber` field because numbers aren't of type CodeLetter
-  const matches: (CodeCharacter & { codeNumber: number | undefined })[] = [
-    ...message.matchAll(pattern),
-  ].map((item, ind) => ({
-    rawValue: item[0],
-    codeNumber: isValidA1Z26Number(item[0])
-      ? // Cipher code is 1-indexed so subtract one
-        Number(item[0]) - 1
-      : undefined,
-    codeLetter: undefined,
-    position: ind,
-    transform: (c: string) => (c === letterDelimiter ? "" : c.toUpperCase()),
-  }));
+  if (mode === "decode") {
+    // A1Z26 coded messages are set up differently from normal so parsing has to be custom
+    const pattern = /(\d+|[^\d])/g;
+    // Use a new `codeNumber` field because numbers aren't of type CodeLetter
+    const matches: (CodeCharacter & { codeNumber: number | undefined })[] = [
+      ...message.matchAll(pattern),
+    ].map((item, ind) => ({
+      rawValue: item[0],
+      codeNumber: isValidA1Z26Number(item[0])
+        ? // Cipher code is 1-indexed so subtract one
+          Number(item[0]) - 1
+        : undefined,
+      codeLetter: undefined,
+      position: ind,
+      transform: (c: string) => (c === letterDelimiter ? "" : c.toUpperCase()),
+    }));
 
-  return matches
-    .map((m) =>
-      m.transform(
-        typeof m.codeNumber === "undefined"
-          ? m.rawValue
-          : codeLetters[m.codeNumber]
+    return matches
+      .map((m) =>
+        m.transform(
+          typeof m.codeNumber === "undefined"
+            ? m.rawValue
+            : codeLetters[m.codeNumber]
+        )
       )
+      .join("");
+  } else {
+    const codedMessage = splitIntoCodeCharacters(message);
+    const numericAlphabet = codeLetters.map((l, index) => `${index + 1}`);
+    return getSubstitutionResult(
+      codedMessage,
+      // Typescript doesn't like that I'm using a readonly array here but it's fine.
+      //@ts-ignore
+      codeLetters,
+      numericAlphabet
     )
-    .join("");
+      .join("-")
+      .replaceAll(/-([^\d])/g, "$1")
+      .replaceAll(/([^\d])-/g, "$1");
+  }
 };
 
 export const getAlphabetStartingAt = (letter: CodeLetter) => {
@@ -132,19 +152,31 @@ export const getAlphabetStartingAt = (letter: CodeLetter) => {
   return [...codeLetters.slice(ind), ...codeLetters.slice(0, ind)];
 };
 
-export const getVigenereResult = (message: string, key: string): string => {
+export const getVigenereResult = (
+  message: string,
+  key: string,
+  mode: cryptoMode
+): string => {
   let currentKeyInd = 0;
   return splitIntoCodeCharacters(message)
     .map((char) =>
       typeof char.codeLetter !== "undefined"
         ? getSubstitutionResult(
             [char],
-            getAlphabetStartingAt(
-              key[currentKeyInd++ % key.length] as CodeLetter
-            ),
             // Typescript doesn't like that I'm using a readonly array here but it's fine.
             //@ts-ignore
-            codeLetters
+            mode === "decode"
+              ? getAlphabetStartingAt(
+                  key[currentKeyInd++ % key.length] as CodeLetter
+                )
+              : codeLetters,
+            // Typescript doesn't like that I'm using a readonly array here but it's fine.
+            //@ts-ignore
+            mode === "decode"
+              ? codeLetters
+              : getAlphabetStartingAt(
+                  key[currentKeyInd++ % key.length] as CodeLetter
+                )
           )
         : char.rawValue
     )

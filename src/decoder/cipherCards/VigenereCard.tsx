@@ -1,8 +1,8 @@
 import * as React from "react";
 import { getVigenereResult } from "../cryptoUtilities";
 import { TextField } from "@fluentui/react";
-import ResultMessage from "../results/ResultMessage";
 import ResultCard from "../results/ResultCard";
+import ResultPair from "../results/ResultPair";
 
 interface Props {
   message: string;
@@ -31,7 +31,12 @@ const VigenereCard = ({ message }: Props) => {
         />
       )}
     >
-      <ResultMessage message={getVigenereResult(message, key)} />
+      <ResultPair
+        message={message}
+        cryptoFunction={(message, mode) =>
+          getVigenereResult(message, key, mode)
+        }
+      />
     </ResultCard>
   );
 };
