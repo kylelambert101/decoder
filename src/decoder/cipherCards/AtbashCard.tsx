@@ -7,7 +7,7 @@ interface Props {
   message: string;
 }
 
-const AtbashResults = ({ message }: Props): React.ReactElement => {
+const AtbashCard = ({ message }: Props): React.ReactElement => {
   return (
     <ResultCard label="Atbash Cipher Results">
       <ResultMessage message={getAtbashResult(message)} />
@@ -15,4 +15,4 @@ const AtbashResults = ({ message }: Props): React.ReactElement => {
   );
 };
 
-export default AtbashResults;
+export default AtbashCard;

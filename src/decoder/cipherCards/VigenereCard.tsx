@@ -8,7 +8,7 @@ interface Props {
   message: string;
 }
 
-const VigenereResults = ({ message }: Props) => {
+const VigenereCard = ({ message }: Props) => {
   const [key, setKey] = React.useState("SECRET_KEY");
 
   const handleKeyChange = (
@@ -36,4 +36,4 @@ const VigenereResults = ({ message }: Props) => {
   );
 };
 
-export default VigenereResults;
+export default VigenereCard;

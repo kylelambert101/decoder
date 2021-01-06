@@ -10,7 +10,7 @@ interface Props {
   message: string;
 }
 
-const CaesarResults = ({ message }: Props): React.ReactElement => {
+const CaesarCard = ({ message }: Props): React.ReactElement => {
   return (
     <ResultCard label="Caesar Cipher Results">
       <Stack horizontal tokens={{ childrenGap: "1em" }}>
@@ -35,4 +35,4 @@ const CaesarResults = ({ message }: Props): React.ReactElement => {
   );
 };
 
-export default CaesarResults;
+export default CaesarCard;
