@@ -1,7 +1,7 @@
 import * as React from "react";
 import { getAtbashResult } from "../cryptoUtilities";
-import ResultMessage from "../results/ResultMessage";
 import ResultCard from "../results/ResultCard";
+import ResultPair from "../results/ResultPair";
 
 interface Props {
   message: string;
@@ -10,7 +10,10 @@ interface Props {
 const AtbashCard = ({ message }: Props): React.ReactElement => {
   return (
     <ResultCard label="Atbash Cipher Results">
-      <ResultMessage message={getAtbashResult(message)} />
+      <ResultPair
+        message={message}
+        cryptoFunction={(message, mode) => getAtbashResult(message, mode)}
+      />
     </ResultCard>
   );
 };

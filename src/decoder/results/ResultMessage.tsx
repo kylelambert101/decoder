@@ -4,31 +4,33 @@ import { isWord } from "../cryptoUtilities";
 
 export interface Props {
   message: string;
+  extraStyle?: React.CSSProperties;
 }
 
-const ResultMessage = ({ message }: Props): React.ReactElement => {
+const ResultMessage = ({ message, extraStyle }: Props): React.ReactElement => {
   return (
-    <>
+    <span>
       {message.length > 0 ? (
         message.split(" ").map((word) =>
           isWord(word) ? (
             <Text
               variant="mediumPlus"
-              style={{
-                color: "#6B69D6",
-                fontWeight: "bold",
-              }}
+              style={{ ...extraStyle, color: "#6B69D6", fontWeight: "bold" }}
             >
               {word}{" "}
             </Text>
           ) : (
-            <Text variant="mediumPlus">{word} </Text>
+            <Text variant="mediumPlus" style={extraStyle}>
+              {word}{" "}
+            </Text>
           )
         )
       ) : (
-        <Text variant="mediumPlus">-</Text>
+        <Text variant="mediumPlus" style={extraStyle}>
+          -
+        </Text>
       )}
-    </>
+    </span>
   );
 };
 

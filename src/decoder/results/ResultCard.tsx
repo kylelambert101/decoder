@@ -41,8 +41,8 @@ const ResultCard = ({ label, children, labelFriends }: Props) => {
           </Label>
           {typeof labelFriends !== "undefined" && labelFriends()}
         </Stack>
-        <Stack horizontalAlign="center" style={{ width: "100%" }}>
-          <div id={resultId}>{children}</div>
+        <Stack id={resultId} horizontalAlign="center" style={{ width: "100%" }}>
+          {children}
         </Stack>
       </Card.Item>
     </Card>
