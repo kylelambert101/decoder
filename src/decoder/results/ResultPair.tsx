@@ -15,19 +15,18 @@ const ResultPair = ({ message, cryptoFunction }: Props): React.ReactElement => {
         grow
         horizontal
         horizontalAlign="center"
-        style={{ maxWidth: "49%" }}
+        style={{ maxWidth: "50%", paddingRight: "0.25em" }}
       >
         <ResultMessage
           message={cryptoFunction(message, "encode")}
           extraStyle={{ fontFamily: "monospace" }}
         />
       </Stack>
-      <Stack grow style={{ maxWidth: "2%" }}></Stack>
       <Stack
         grow
         horizontal
         horizontalAlign="center"
-        style={{ maxWidth: "49%" }}
+        style={{ maxWidth: "50%", paddingLeft: "0.25em" }}
       >
         <ResultMessage message={cryptoFunction(message, "decode")} />
       </Stack>
